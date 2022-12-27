@@ -46,7 +46,7 @@ func (up *userPresenter) UsersSuccessResponse(data *[]entities.User) *fiber.Map 
 
 	return &fiber.Map{
 		"status": true,
-		"data":   data,
+		"data":   users,
 		"error":  nil,
 	}
 }

@@ -7,4 +7,4 @@ This is a sample application that demonstrates how to build a Go application usi
 <!-- ### Prerequisites -->
 
 - ER Diagram
-  <img src="./assets/ER-Diagram.png">
+  <img src="./assets/ERD.png">
