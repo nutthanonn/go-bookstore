@@ -23,6 +23,7 @@ func main() {
 	api := app.Group("/api")
 	r := registry.NewRegistry(db)
 	routers.UserRouter(api, r.NewAppController())
+	routers.BookRouter(api, r.NewAppController())
 
 	app.Listen(":3000")
 }
