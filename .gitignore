@@ -21,3 +21,6 @@
 go.work
 
 /api/gomon_spawn
+
+.env
+.DS_Store
