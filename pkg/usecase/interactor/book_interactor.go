@@ -15,7 +15,7 @@ type BookInteractor interface {
 	CreateBook(book *entities.Books) (*entities.Books, error)
 	ReadBook() (*[]entities.Books, error)
 	ReadBookByID(ID string) (*entities.Books, error)
-	UpdateBook(book *entities.Books) (*entities.Books, error)
+	UpdateBook(book *entities.Books, ID string) (*entities.Books, error)
 	DeleteBook(ID string) error
 }
 
@@ -53,8 +53,8 @@ func (bi *bookInteractor) ReadBookByID(ID string) (*entities.Books, error) {
 	return book, nil
 }
 
-func (bi *bookInteractor) UpdateBook(book *entities.Books) (*entities.Books, error) {
-	updatedBook, err := bi.BookRepository.UpdateBook(book)
+func (bi *bookInteractor) UpdateBook(book *entities.Books, ID string) (*entities.Books, error) {
+	updatedBook, err := bi.BookRepository.UpdateBook(book, ID)
 	if err != nil {
 		return nil, err
 	}
