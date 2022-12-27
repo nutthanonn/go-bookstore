@@ -51,3 +51,22 @@ func DeleteUser(co controller.AppController) fiber.Handler {
 		return c.Status(fiber.StatusOK).JSON(p.UserDeleteSuccessResponse())
 	}
 }
+
+func UpdateUser(co controller.AppController) fiber.Handler {
+	return func(c *fiber.Ctx) error {
+
+		var user entities.User
+		p := presenter.NewUserPresenter()
+
+		if err := c.BodyParser(&user); err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(p.UserErrorResponse(err))
+		}
+
+		updatedUser, err := co.User.UpdateUser(&user)
+		if err != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(p.UserErrorResponse(err))
+		}
+
+		return c.Status(fiber.StatusOK).JSON(p.UserSuccessResponse(updatedUser))
+	}
+}
