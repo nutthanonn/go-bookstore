@@ -50,11 +50,11 @@ func (br *bookRepository) ReadBookByID(ID string) (*entities.Books, error) {
 	return &book, nil
 }
 
-func (br *bookRepository) UpdateBook(book *entities.Books) (*entities.Books, error) {
+func (br *bookRepository) UpdateBook(book *entities.Books, ID string) (*entities.Books, error) {
 	var oldBook entities.Books
 	book.Updated_at = time.Now()
 
-	if err := br.db.First(&oldBook, book.Book_id).Error; err != nil {
+	if err := br.db.First(&oldBook, ID).Error; err != nil {
 		return nil, err
 	}
 
