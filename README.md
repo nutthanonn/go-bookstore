@@ -6,6 +6,7 @@ This is a sample application that demonstrates how to build a Go application usi
 
 - [Getting Started](#getting-started)
   - [Installing](#installing)
+  - [Setup](#Setup)
   - [ER Diagram](#er-diagram)
   - [Router](#installing)
     - [User Router](#user-router)
@@ -13,8 +14,6 @@ This is a sample application that demonstrates how to build a Go application usi
 - [Project Structure](#project-structure)
 
 ## Getting Started
-
-<!-- ### Prerequisites -->
 
 ### ER Diagram
 
@@ -26,6 +25,18 @@ This is a sample application that demonstrates how to build a Go application usi
 git clone https://github.com/nutthanonn/go-bookstore.git
 cd go-bookstore
 go get
+```
+
+### Setup
+
+_Create .env file in root project_
+
+```
+DB_USERNAME=
+DB_PASSWORD=
+DB_HOST=
+DB_PORT=
+DB_NAME=
 ```
 
 # Router
