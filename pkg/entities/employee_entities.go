@@ -7,7 +7,7 @@ import (
 )
 
 type Employees struct {
-	Employee_id   uuid.UUID `gorm:"primary_key;" json:"employee_id"`
+	Employee_id   uuid.UUID `gorm:"primary_key;type:varchar(255)" json:"employee_id"`
 	First_name    string    `json:"first_name"`
 	Last_name     string    `json:"last_name"`
 	Email         string    `json:"email"`
