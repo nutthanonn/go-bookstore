@@ -41,6 +41,13 @@ func (ur *userRepository) ReadUser() (*[]entities.User, error) {
 
 func (ur *userRepository) UpdateUser(user *entities.User) (*entities.User, error) {
 
+	var oldUser entities.User
+	if err := ur.db.First(&oldUser, user.ID).Error; err != nil {
+		return nil, err
+	}
+
+	user.ID = oldUser.ID
+	user.Created_at = oldUser.Created_at
 	user.Updated_at = time.Now()
 
 	if err := ur.db.Save(user).Error; err != nil {
