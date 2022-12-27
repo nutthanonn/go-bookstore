@@ -29,13 +29,14 @@ func NewDB() *gorm.DB {
 	}
 
 	if err := db.AutoMigrate(
-		&entities.Books{},
-		&entities.Employees{},
-		&entities.Customers{},
-		&entities.Orders{},
-		&entities.OrderDetails{},
-		&entities.Inventories{},
-		&entities.Sales{},
+		&entities.User{},
+		// &entities.Books{},
+		// &entities.Employees{},
+		// &entities.Customers{},
+		// &entities.Orders{},
+		// &entities.OrderDetails{},
+		// &entities.Inventories{},
+		// &entities.Sales{},
 	); err != nil {
 		panic(err)
 	}
