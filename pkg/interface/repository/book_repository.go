@@ -42,7 +42,7 @@ func (br *bookRepository) ReadBook() (*[]entities.Books, error) {
 
 func (br *bookRepository) ReadBookByID(ID string) (*entities.Books, error) {
 	var book entities.Books
-	err := br.db.First(&book, ID).Error
+	err := br.db.First(&book, "book_id = ?", ID).Error
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ func (br *bookRepository) UpdateBook(book *entities.Books, ID string) (*entities
 	var oldBook entities.Books
 	book.Updated_at = time.Now()
 
-	if err := br.db.First(&oldBook, ID).Error; err != nil {
+	if err := br.db.First(&oldBook, "book_id = ?", ID).Error; err != nil {
 		return nil, err
 	}
 
@@ -71,8 +71,7 @@ func (br *bookRepository) UpdateBook(book *entities.Books, ID string) (*entities
 }
 
 func (br *bookRepository) DeleteBook(ID string) error {
-	err := br.db.Delete(&entities.Books{}, ID).Error
-	if err != nil {
+	if err := br.db.Where("book_id = ?", ID).Delete(&entities.Books{}).Error; err != nil {
 		return err
 	}
 

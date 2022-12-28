@@ -10,7 +10,7 @@ func (b *bookHandler) GetBookById(ca controller.AppController) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		ID := c.Params("id")
 		p := presenter.NewBookPresenter()
-		if ID == "" || len(ID) > 24 {
+		if ID == "" {
 			return c.Status(fiber.StatusBadRequest).JSON(p.BookErrorResponse(fiber.ErrBadRequest))
 		}
 
