@@ -14,7 +14,7 @@ type Employees struct {
 	Phone         string    `json:"phone"`
 	Salary        int       `json:"salary"`
 	Job_title     string    `json:"job_title"`
-	Date_of_birth time.Time `json:"date_of_birth"`
+	Date_of_birth string    `json:"date_of_birth"`
 	Hire_date     time.Time `json:"hire_date"`
 	Create_at     time.Time `json:"create_at"`
 	Update_at     time.Time `json:"update_at"`
