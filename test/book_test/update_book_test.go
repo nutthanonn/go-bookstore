@@ -34,7 +34,7 @@ func Test_UpdateBook(t *testing.T) {
 		res, err := app.Test(req)
 
 		utils.AssertEqual(t, nil, err, "app.Test(req)")
-		utils.AssertEqual(t, fiber.StatusBadRequest, res.StatusCode, "Status code")
+		utils.AssertEqual(t, fiber.StatusMethodNotAllowed, res.StatusCode, "Status code")
 	})
 
 	t.Run("FAKE UUID", func(t *testing.T) {

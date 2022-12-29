@@ -29,7 +29,7 @@ func Test_DeleteBook(t *testing.T) {
 	routers.BookRouter(api, r.NewAppController())
 
 	t.Run("NO PARAMS", func(t *testing.T) {
-		req := httptest.NewRequest("DELETE", "/api/customer/", nil)
+		req := httptest.NewRequest("DELETE", "/api/book/", nil)
 		req.Header.Set("Content-Type", "application/json")
 		res, err := app.Test(req)
 
@@ -38,7 +38,7 @@ func Test_DeleteBook(t *testing.T) {
 	})
 
 	t.Run("FAKE UUID", func(t *testing.T) {
-		req := httptest.NewRequest("DELETE", "/api/customer/123", nil)
+		req := httptest.NewRequest("DELETE", "/api/book/123", nil)
 		req.Header.Set("Content-Type", "application/json")
 		res, err := app.Test(req)
 
