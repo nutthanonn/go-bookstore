@@ -7,6 +7,7 @@ This is a sample application that demonstrates how to build a Go application usi
 - [Getting Started](#getting-started)
   - [Installing](#installing)
   - [Setup](#Setup)
+  - [UnitTesting](#unit-testing)
   - [ER Diagram](#er-diagram)
   - [Router](#installing)
     - [User Router](#user-router)
@@ -37,6 +38,13 @@ DB_PASSWORD=
 DB_HOST=
 DB_PORT=
 DB_NAME=
+```
+
+### Unit Testing
+
+```bash
+cd test
+go test -v
 ```
 
 # Router
