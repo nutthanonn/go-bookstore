@@ -1,6 +1,8 @@
 package employeehandler
 
 import (
+	"errors"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/nutthanonn/go-clean-architecture/pkg/entities"
 	"github.com/nutthanonn/go-clean-architecture/pkg/interface/controller"
@@ -12,6 +14,10 @@ func (h *employeeHandlers) UpdateEmployee(ca controller.AppController) fiber.Han
 		id := c.Params("id")
 		p := presenter.NewEmployeePresenter()
 		var emp entities.Employees
+
+		if !h.IsValidUUID(id) {
+			return c.Status(fiber.StatusBadRequest).JSON(p.EmployeeErrorResponse(errors.New("invalid params id")))
+		}
 
 		if err := c.BodyParser(&emp); err != nil {
 			return c.Status(fiber.StatusBadRequest).JSON(p.EmployeeErrorResponse(err))

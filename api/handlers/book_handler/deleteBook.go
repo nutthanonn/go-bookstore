@@ -1,6 +1,8 @@
 package bookhandler
 
 import (
+	"errors"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/nutthanonn/go-clean-architecture/pkg/interface/controller"
 	"github.com/nutthanonn/go-clean-architecture/pkg/interface/presenter"
@@ -8,14 +10,13 @@ import (
 
 func (b *bookHandler) DeleteBook(ca controller.AppController) fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		ID := c.Params("id")
+		id := c.Params("id")
 		p := presenter.NewBookPresenter()
 
-		if ID == "" || len(ID) > 24 {
-			return c.Status(fiber.StatusBadRequest).JSON(p.BookErrorResponse(fiber.ErrBadRequest))
+		if !b.IsValidUUID(id) {
+			return c.Status(fiber.StatusBadRequest).JSON(p.BookErrorResponse(errors.New("invalid params id")))
 		}
-
-		err := ca.Book.DeleteBook(ID)
+		err := ca.Book.DeleteBook(id)
 
 		if err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(p.BookErrorResponse(err))
