@@ -2,7 +2,9 @@ package datastore
 
 import (
 	"fmt"
+	"log"
 	"os"
+	"regexp"
 
 	"github.com/joho/godotenv"
 	"github.com/nutthanonn/go-clean-architecture/pkg/entities"
@@ -10,10 +12,22 @@ import (
 	"gorm.io/gorm"
 )
 
-func NewDB() *gorm.DB {
-	if err := godotenv.Load("../.env"); err != nil {
-		panic(err)
+const projectDirName = "go-bookstore" // change to relevant project name
+
+func loadEnv() {
+	projectName := regexp.MustCompile(`^(.*` + projectDirName + `)`)
+	currentWorkDirectory, _ := os.Getwd()
+	rootPath := projectName.Find([]byte(currentWorkDirectory))
+
+	err := godotenv.Load(string(rootPath) + `/.env`)
+
+	if err != nil {
+		log.Fatalf("Error loading .env file")
 	}
+}
+
+func NewDB() *gorm.DB {
+	loadEnv()
 
 	DB_USERNAME := os.Getenv("DB_USERNAME")
 	DB_PASSWORD := os.Getenv("DB_PASSWORD")
