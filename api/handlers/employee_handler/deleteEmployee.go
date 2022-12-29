@@ -13,8 +13,8 @@ func (h *employeeHandlers) DeleteEmployee(ca controller.AppController) fiber.Han
 		id := c.Params("id")
 		p := presenter.NewEmployeePresenter()
 
-		if id == "" {
-			return c.Status(fiber.StatusBadRequest).JSON(p.EmployeeErrorResponse(errors.New("required params id")))
+		if !h.IsValidUUID(id) {
+			return c.Status(fiber.StatusBadRequest).JSON(p.EmployeeErrorResponse(errors.New("invalid params id")))
 		}
 
 		if err := ca.Employee.DeleteEmployee(id); err != nil {

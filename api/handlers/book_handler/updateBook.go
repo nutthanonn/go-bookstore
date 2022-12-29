@@ -15,8 +15,8 @@ func (b *bookHandler) UpdateBook(ca controller.AppController) fiber.Handler {
 		id := c.Params("id")
 		p := presenter.NewBookPresenter()
 
-		if id == "" {
-			return c.Status(fiber.StatusBadRequest).JSON(p.BookErrorResponse(errors.New("id is required")))
+		if !b.IsValidUUID(id) {
+			return c.Status(fiber.StatusBadRequest).JSON(p.BookErrorResponse(errors.New("invalid params id")))
 		}
 
 		if err := c.BodyParser(&book); err != nil {
