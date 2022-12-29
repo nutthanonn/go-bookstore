@@ -9,9 +9,9 @@ import (
 func BookRouter(app fiber.Router, ca controller.AppController) {
 	bh := bookHandler.NewBookHandler()
 
-	app.Get("/books", bh.GetBook(ca))
-	app.Get("/books/:id", bh.GetBookById(ca))
-	app.Post("/books", bh.CreateBook(ca))
-	app.Put("/books/:id", bh.UpdateBook(ca))
-	app.Delete("/books", bh.DeleteBook(ca))
+	app.Get("/book", bh.GetBook(ca))
+	app.Get("/book/:id", bh.GetBookById(ca))
+	app.Post("/book", bh.CreateBook(ca))
+	app.Put("/book/:id", bh.UpdateBook(ca))
+	app.Delete("/book", bh.DeleteBook(ca))
 }

@@ -13,8 +13,8 @@ func (h *employeeHandlers) GetEmployeeById(ca controller.AppController) fiber.Ha
 		id := c.Params("id")
 		p := presenter.NewEmployeePresenter()
 
-		if id == "" {
-			return c.Status(fiber.StatusBadRequest).JSON(p.EmployeeErrorResponse(errors.New("required params id")))
+		if !h.IsValidUUID(id) {
+			return c.Status(fiber.StatusBadRequest).JSON(p.EmployeeErrorResponse(errors.New("invalid params id")))
 		}
 
 		emp, err := ca.Employee.ReadEmployeeById(id)
