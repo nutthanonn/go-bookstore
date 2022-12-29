@@ -29,7 +29,7 @@ func Test_GetEmployeeById(t *testing.T) {
 	routers.EmployeeRouter(api, r.NewAppController())
 
 	t.Run("FAKE UUID", func(t *testing.T) {
-		req := httptest.NewRequest("GET", "/api/customer/123", nil)
+		req := httptest.NewRequest("GET", "/api/employee/123", nil)
 		req.Header.Set("Content-Type", "application/json")
 		res, err := app.Test(req)
 
