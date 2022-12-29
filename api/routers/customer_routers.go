@@ -10,4 +10,5 @@ func CustomerHandler(app fiber.Router, ca controller.AppController) {
 	ch := customerHandler.NewCustomerHandlers()
 
 	app.Get("/customers", ch.GetCustomer(ca))
+	app.Get("/customers/:id", ch.GetCustomerById(ca))
 }
