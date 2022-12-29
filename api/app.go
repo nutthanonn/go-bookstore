@@ -25,6 +25,7 @@ func main() {
 	routers.UserRouter(api, r.NewAppController())
 	routers.BookRouter(api, r.NewAppController())
 	routers.EmployeeRouter(api, r.NewAppController())
+	routers.CustomerHandler(api, r.NewAppController())
 
 	app.Listen(":3000")
 }
