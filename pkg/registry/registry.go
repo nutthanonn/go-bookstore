@@ -22,5 +22,6 @@ func (r *registry) NewAppController() controller.AppController {
 		User:     r.NewUserController(),
 		Book:     r.NewBookController(),
 		Employee: r.NewEmployeeController(),
+		Customer: r.NewCustomerController(),
 	}
 }

@@ -32,7 +32,7 @@ func NewDB() *gorm.DB {
 		&entities.User{},
 		&entities.Employees{},
 		&entities.Books{},
-		// &entities.Customers{},
+		&entities.Customers{},
 		// &entities.Orders{},
 		// &entities.OrderDetails{},
 		// &entities.Inventories{},

@@ -12,4 +12,8 @@ type AppController struct {
 	Employee interface {
 		EmployeeController
 	}
+
+	Customer interface {
+		CustomerController
+	}
 }
