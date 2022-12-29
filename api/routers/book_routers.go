@@ -13,5 +13,5 @@ func BookRouter(app fiber.Router, ca controller.AppController) {
 	app.Get("/book/:id", bh.GetBookById(ca))
 	app.Post("/book", bh.CreateBook(ca))
 	app.Put("/book/:id", bh.UpdateBook(ca))
-	app.Delete("/book", bh.DeleteBook(ca))
+	app.Delete("/book/:id", bh.DeleteBook(ca))
 }
