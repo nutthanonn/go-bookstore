@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"errors"
 	"time"
 
 	"github.com/google/uuid"
@@ -51,9 +52,13 @@ func (er *employeeRepository) ReadEmployeeById(ID string) (*entities.Employees, 
 }
 
 func (er *employeeRepository) UpdateEmployee(emp *entities.Employees, ID string) (*entities.Employees, error) {
-	var oldEmp entities.Employees
+	var oldEmp *entities.Employees
 	if err := er.db.First(&oldEmp, "employee_id = ?", ID).Error; err != nil {
 		return nil, err
+	}
+
+	if oldEmp == nil {
+		return nil, errors.New("employee not found")
 	}
 
 	emp.Employee_id = oldEmp.Employee_id

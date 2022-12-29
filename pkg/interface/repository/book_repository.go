@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"errors"
 	"time"
 
 	"github.com/google/uuid"
@@ -51,11 +52,15 @@ func (br *bookRepository) ReadBookByID(ID string) (*entities.Books, error) {
 }
 
 func (br *bookRepository) UpdateBook(book *entities.Books, ID string) (*entities.Books, error) {
-	var oldBook entities.Books
+	var oldBook *entities.Books
 	book.Updated_at = time.Now()
 
 	if err := br.db.First(&oldBook, "book_id = ?", ID).Error; err != nil {
 		return nil, err
+	}
+
+	if oldBook == nil {
+		return nil, errors.New("book not found")
 	}
 
 	book.Book_id = oldBook.Book_id
