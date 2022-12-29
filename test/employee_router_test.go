@@ -1,7 +1,6 @@
 package test
 
 import (
-	"fmt"
 	"net/http/httptest"
 	"testing"
 
@@ -13,7 +12,6 @@ import (
 )
 
 func Test_CreateEmployee(t *testing.T) {
-	fmt.Println("*** Start Testing API Create Employee ***")
 	db := datastore.NewDB()
 	defer func() {
 		sqlDB, err := db.DB()
@@ -37,13 +35,10 @@ func Test_CreateEmployee(t *testing.T) {
 
 		utils.AssertEqual(t, nil, err, "app.Test(req)")
 		utils.AssertEqual(t, fiber.StatusBadRequest, res.StatusCode, "Status code")
-		fmt.Println("* ✅ FAIL CREATE EMPLOYEE")
 	})
-	fmt.Printf("\n\n")
 }
 
 func Test_DeleteEmployee(t *testing.T) {
-	fmt.Println("*** Start Testing API Delete Employee ***")
 	db := datastore.NewDB()
 	defer func() {
 		sqlDB, err := db.DB()
@@ -67,14 +62,11 @@ func Test_DeleteEmployee(t *testing.T) {
 
 		utils.AssertEqual(t, nil, err, "app.Test(req)")
 		utils.AssertEqual(t, fiber.StatusMethodNotAllowed, res.StatusCode, "Status code")
-		fmt.Println("* ✅ NO PARAMS")
 	})
 
-	fmt.Printf("\n\n")
 }
 
 func Test_UpdateEmployee(t *testing.T) {
-	fmt.Println("*** Start Testing API Update Employee ***")
 	db := datastore.NewDB()
 	defer func() {
 		sqlDB, err := db.DB()
@@ -98,8 +90,5 @@ func Test_UpdateEmployee(t *testing.T) {
 
 		utils.AssertEqual(t, nil, err, "app.Test(req)")
 		utils.AssertEqual(t, fiber.StatusMethodNotAllowed, res.StatusCode, "Status code")
-		fmt.Println("* ✅ NO PARAMS")
 	})
-
-	fmt.Printf("\n\n")
 }
