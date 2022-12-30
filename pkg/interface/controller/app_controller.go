@@ -16,4 +16,8 @@ type AppController struct {
 	Customer interface {
 		CustomerController
 	}
+
+	Inventory interface {
+		InventoryController
+	}
 }

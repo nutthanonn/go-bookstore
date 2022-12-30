@@ -47,10 +47,10 @@ func NewDB() *gorm.DB {
 		&entities.Employees{},
 		&entities.Books{},
 		&entities.Customers{},
-		// &entities.Orders{},
-		// &entities.OrderDetails{},
-		// &entities.Inventories{},
-		// &entities.Sales{},
+		&entities.Inventories{},
+		&entities.Orders{},
+		&entities.OrderDetails{},
+		&entities.Sales{},
 	); err != nil {
 		panic(err)
 	}
