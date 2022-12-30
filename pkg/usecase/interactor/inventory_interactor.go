@@ -8,10 +8,15 @@ import (
 
 type inventoryInteractor struct {
 	InventoryPresenter  presenter.InventoryPresenter
-	InventoryRepository repository.Inventory
+	InventoryRepository repository.InventoryRepository
 }
 
-func NewInventoryInteractor(ip presenter.InventoryPresenter, ir repository.Inventory) repository.Inventory {
+type InventoryInteractor interface {
+	ReadInventoryById(book_id string) (*entities.Inventories, error)
+	UpdateInventory(inventory *entities.Inventories, ID string) (*entities.Inventories, error)
+}
+
+func NewInventoryInteractor(ip presenter.InventoryPresenter, ir repository.InventoryRepository) InventoryInteractor {
 	return &inventoryInteractor{
 		InventoryPresenter:  ip,
 		InventoryRepository: ir,

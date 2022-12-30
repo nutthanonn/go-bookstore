@@ -13,7 +13,7 @@ type inventoryRespoitory struct {
 	db *gorm.DB
 }
 
-func NewInventoryRepository(db *gorm.DB) repository.Inventory {
+func NewInventoryRepository(db *gorm.DB) repository.InventoryRepository {
 	return &inventoryRespoitory{db}
 }
 
