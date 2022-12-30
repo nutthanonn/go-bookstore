@@ -18,7 +18,7 @@ This is a sample application that demonstrates how to build a Go application usi
 
 ### ER Diagram
 
-  <img src="./assets/ERD.png">
+  <img src="./assets/ER.png">
 
 ### Installing
 
