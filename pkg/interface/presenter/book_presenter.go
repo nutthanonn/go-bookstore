@@ -14,6 +14,8 @@ type Book struct {
 	Publish_year string    `json:"publish_year"`
 	Price        float32   `json:"price"`
 	Genre        string    `json:"genre"`
+
+	Inventory_id entities.Inventories `json:"inventory_id"`
 }
 
 type bookPresenter struct{}
@@ -30,6 +32,7 @@ func (bp *bookPresenter) BookSuccessResponse(data *entities.Books) *fiber.Map {
 		Publish_year: data.Publish_year,
 		Price:        data.Price,
 		Genre:        data.Genre,
+		Inventory_id: data.Inventory_id,
 	}
 
 	return &fiber.Map{
@@ -39,10 +42,10 @@ func (bp *bookPresenter) BookSuccessResponse(data *entities.Books) *fiber.Map {
 	}
 }
 
-func (bp *bookPresenter) BooksSuccessResponse(data *[]entities.Books) *fiber.Map {
+func (bp *bookPresenter) BooksSuccessResponse(data []*entities.Books) *fiber.Map {
 	var books []Book
 
-	for _, book := range *data {
+	for _, book := range data {
 		b := Book{
 			Book_id:      book.Book_id,
 			Title:        book.Title,
@@ -50,6 +53,7 @@ func (bp *bookPresenter) BooksSuccessResponse(data *[]entities.Books) *fiber.Map
 			Publish_year: book.Publish_year,
 			Price:        book.Price,
 			Genre:        book.Genre,
+			Inventory_id: book.Inventory_id,
 		}
 
 		books = append(books, b)

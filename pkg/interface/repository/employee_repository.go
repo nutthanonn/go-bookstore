@@ -63,7 +63,7 @@ func (er *employeeRepository) UpdateEmployee(emp *entities.Employees, ID string)
 
 	emp.Employee_id = oldEmp.Employee_id
 	emp.Create_at = oldEmp.Create_at
-	emp.Update_at = oldEmp.Update_at
+	emp.Update_at = time.Now()
 
 	if err := er.db.Save(&emp).Error; err != nil {
 		return nil, err

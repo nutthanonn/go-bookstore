@@ -11,7 +11,7 @@ type bookController struct {
 
 type BookController interface {
 	CreateBook(book *entities.Books) (*entities.Books, error)
-	ReadBook() (*[]entities.Books, error)
+	ReadBook() ([]*entities.Books, error)
 	ReadBookByID(ID string) (*entities.Books, error)
 	UpdateBook(book *entities.Books, ID string) (*entities.Books, error)
 	DeleteBook(ID string) error
@@ -25,7 +25,7 @@ func (bc *bookController) CreateBook(book *entities.Books) (*entities.Books, err
 	return bc.bookController.CreateBook(book)
 }
 
-func (bc *bookController) ReadBook() (*[]entities.Books, error) {
+func (bc *bookController) ReadBook() ([]*entities.Books, error) {
 	return bc.bookController.ReadBook()
 }
 

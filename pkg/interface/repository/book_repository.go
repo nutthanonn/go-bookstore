@@ -31,24 +31,23 @@ func (br *bookRepository) CreateBook(book *entities.Books) (*entities.Books, err
 	return book, nil
 }
 
-func (br *bookRepository) ReadBook() (*[]entities.Books, error) {
-	var books []entities.Books
-	err := br.db.Find(&books).Error
-	if err != nil {
+func (br *bookRepository) ReadBook() ([]*entities.Books, error) {
+	var books []*entities.Books
+	if err := br.db.Preload("Inventory_id").Find(&books).Error; err != nil {
 		return nil, err
 	}
 
-	return &books, nil
+	return books, nil
 }
 
 func (br *bookRepository) ReadBookByID(ID string) (*entities.Books, error) {
-	var book entities.Books
-	err := br.db.First(&book, "book_id = ?", ID).Error
-	if err != nil {
+	var book *entities.Books
+
+	if err := br.db.Preload("Inventory_id").First(&book, "book_id = ?", ID).Error; err != nil {
 		return nil, err
 	}
 
-	return &book, nil
+	return book, nil
 }
 
 func (br *bookRepository) UpdateBook(book *entities.Books, ID string) (*entities.Books, error) {
