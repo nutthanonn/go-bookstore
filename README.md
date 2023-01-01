@@ -49,14 +49,6 @@ go test -v
 
 # Router
 
-## User Router
-
-|    API Path    | Method |       What it does        |
-| :------------: | :----: | :-----------------------: |
-|   /api/users   |  GET   | Fetches the list of users |
-|   /api/users   |  POST  |        Create user        |
-| /api/users/:id | DELETE |        Delete user        |
-
 ## Book Router
 
 |    API Path    | Method |       What it does        |
@@ -76,6 +68,13 @@ go test -v
 |   /api/employee   |  POST  |        Create employee        |
 | /api/employee/:id |  PUT   |        Update employee        |
 | /api/employee/:id | DELETE |        Delete employee        |
+
+## Inventory Router
+
+|     API Path      | Method |        What it does        |
+| :---------------: | :----: | :------------------------: |
+| /api/employee/:id |  GET   | Fetch inventory by book_id |
+| /api/employee/:id |  PUT   |      Update inventory      |
 
 ## Project Structure
 
