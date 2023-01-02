@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/nutthanonn/go-clean-architecture/api/handlers"
 	"github.com/nutthanonn/go-clean-architecture/pkg/interface/controller"
 	"github.com/nutthanonn/go-clean-architecture/pkg/interface/presenter"
 )
@@ -12,7 +13,9 @@ func (h *customerHandlers) GetCustomerById(ca controller.AppController) fiber.Ha
 	return func(c *fiber.Ctx) error {
 		id := c.Params("id")
 		p := presenter.NewCustomerPresenter()
-		if !h.IsValidUUID(id) {
+		handle := handlers.NewAppHandler()
+
+		if !handle.IsValidUUID(id) {
 			return c.Status(fiber.StatusBadRequest).JSON(p.CustomerErrorResponse(errors.New("invalid params id")))
 		}
 

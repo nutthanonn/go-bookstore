@@ -8,13 +8,13 @@ import (
 
 type Books struct {
 	Book_id      uuid.UUID `gorm:"primary_key" json:"book_id"`
-	Title        string    `gorm:"not null;default:null" json:"title"`
-	Author       string    `gorm:"not null;default:null" json:"author"`
-	Publish_year string    `gorm:"not null;default:null" json:"publish_year"`
-	Price        float32   `gorm:"not null;default:null" json:"price"`
+	Title        string    `gorm:"not null" json:"title"`
+	Author       string    `gorm:"not null" json:"author"`
+	Publish_year string    `gorm:"not null" json:"publish_year"`
+	Price        float32   `gorm:"not null" json:"price"`
 	Genre        string    `json:"genre"`
-	Created_at   time.Time `json:"created_at"`
-	Updated_at   time.Time `json:"updated_at"`
+	Created_at   time.Time `gorm:"autoCreateTime" json:"created_at"`
+	Updated_at   time.Time `gorm:"autoUpdateTime" json:"updated_at"`
 
 	// foreign key for Inventory table
 	Inventory_id Inventories `gorm:"foreignkey:Book_id"`
