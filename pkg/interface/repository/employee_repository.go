@@ -2,7 +2,6 @@ package repository
 
 import (
 	"errors"
-	"time"
 
 	"github.com/google/uuid"
 	"github.com/nutthanonn/go-clean-architecture/pkg/entities"
@@ -20,9 +19,6 @@ func NewEmployeeRepository(db *gorm.DB) repository.EmployeeRepository {
 
 func (er *employeeRepository) CreateEmployee(emp *entities.Employees) (*entities.Employees, error) {
 	emp.Employee_id = uuid.New()
-	emp.Create_at = time.Now()
-	emp.Update_at = time.Now()
-	emp.Hire_date = time.Now()
 
 	if err := er.db.Create(&emp).Error; err != nil {
 		return nil, err
@@ -62,8 +58,6 @@ func (er *employeeRepository) UpdateEmployee(emp *entities.Employees, ID string)
 	}
 
 	emp.Employee_id = oldEmp.Employee_id
-	emp.Create_at = oldEmp.Create_at
-	emp.Update_at = time.Now()
 
 	if err := er.db.Save(&emp).Error; err != nil {
 		return nil, err

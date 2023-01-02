@@ -6,7 +6,7 @@ import (
 	"github.com/nutthanonn/go-clean-architecture/pkg/interface/presenter"
 )
 
-func (b *bookHandler) GetBook(ca controller.AppController) fiber.Handler {
+func (h *bookHandler) GetBook(ca controller.AppController) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		books, err := ca.Book.ReadBook()
 		p := presenter.NewBookPresenter()

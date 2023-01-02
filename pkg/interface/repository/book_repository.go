@@ -2,7 +2,6 @@ package repository
 
 import (
 	"errors"
-	"time"
 
 	"github.com/google/uuid"
 	"github.com/nutthanonn/go-clean-architecture/pkg/entities"
@@ -20,8 +19,6 @@ func NewBookRepository(db *gorm.DB) repository.BookRepository {
 
 func (br *bookRepository) CreateBook(book *entities.Books) (*entities.Books, error) {
 	book.Book_id = uuid.New()
-	book.Created_at = time.Now()
-	book.Updated_at = time.Now()
 
 	err := br.db.Create(book).Error
 	if err != nil {
@@ -52,7 +49,6 @@ func (br *bookRepository) ReadBookByID(ID string) (*entities.Books, error) {
 
 func (br *bookRepository) UpdateBook(book *entities.Books, ID string) (*entities.Books, error) {
 	var oldBook *entities.Books
-	book.Updated_at = time.Now()
 
 	if err := br.db.First(&oldBook, "book_id = ?", ID).Error; err != nil {
 		return nil, err
@@ -63,8 +59,6 @@ func (br *bookRepository) UpdateBook(book *entities.Books, ID string) (*entities
 	}
 
 	book.Book_id = oldBook.Book_id
-	book.Created_at = oldBook.Created_at
-	book.Updated_at = time.Now()
 
 	err := br.db.Save(book).Error
 	if err != nil {

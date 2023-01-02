@@ -22,7 +22,6 @@ func main() {
 	app := fiber.New()
 	api := app.Group("/api")
 	r := registry.NewRegistry(db)
-	routers.UserRouter(api, r.NewAppController())
 	routers.BookRouter(api, r.NewAppController())
 	routers.EmployeeRouter(api, r.NewAppController())
 	routers.CustomerHandler(api, r.NewAppController())
