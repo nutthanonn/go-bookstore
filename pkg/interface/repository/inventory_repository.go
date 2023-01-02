@@ -2,7 +2,6 @@ package repository
 
 import (
 	"errors"
-	"time"
 
 	"github.com/nutthanonn/go-clean-architecture/pkg/entities"
 	"github.com/nutthanonn/go-clean-architecture/pkg/usecase/repository"
@@ -38,8 +37,6 @@ func (ir *inventoryRespoitory) UpdateInventory(inventory *entities.Inventories, 
 	}
 
 	inventory.Book_id = oldInventory.Book_id
-	inventory.Created_at = oldInventory.Created_at
-	inventory.Updated_at = time.Now()
 
 	if err := ir.db.Save(&inventory).Error; err != nil {
 		return nil, err

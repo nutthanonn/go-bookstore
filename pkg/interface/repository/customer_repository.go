@@ -2,7 +2,6 @@ package repository
 
 import (
 	"errors"
-	"time"
 
 	"github.com/google/uuid"
 	"github.com/nutthanonn/go-clean-architecture/pkg/entities"
@@ -40,8 +39,6 @@ func (cr *customerRepository) ReadCustomerById(ID string) (*entities.Customers, 
 func (cr *customerRepository) CreateCustomer(cus *entities.Customers) (*entities.Customers, error) {
 
 	cus.Customer_id = uuid.New()
-	cus.Update_at = time.Now()
-	cus.Create_at = time.Now()
 
 	if err := cr.db.Create(cus).Error; err != nil {
 		return nil, err
@@ -62,8 +59,6 @@ func (cr *customerRepository) UpdateCustomer(cus *entities.Customers, ID string)
 	}
 
 	cus.Customer_id = oldCustomer.Customer_id
-	cus.Create_at = oldCustomer.Create_at
-	cus.Update_at = time.Now()
 
 	if err := cr.db.Save(cus).Error; err != nil {
 		return nil, err
