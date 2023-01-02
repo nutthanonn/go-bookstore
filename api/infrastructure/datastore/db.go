@@ -43,7 +43,6 @@ func NewDB() *gorm.DB {
 	}
 
 	if err := db.AutoMigrate(
-		&entities.User{},
 		&entities.Employees{},
 		&entities.Books{},
 		&entities.Customers{},
