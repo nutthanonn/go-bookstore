@@ -8,7 +8,7 @@ import (
 
 type Inventories struct {
 	Book_id    uuid.UUID `gorm:"primary_key" json:"book_id"`
-	Quantity   int       `gorm:"not null;default:0" json:"quantity"`
+	Quantity   int       `gorm:"default:1" json:"quantity"`
 	Created_at time.Time `json:"created_at"`
 	Updated_at time.Time `json:"updated_at"`
 }
