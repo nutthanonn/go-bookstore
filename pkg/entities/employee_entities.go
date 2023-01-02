@@ -8,13 +8,13 @@ import (
 
 type Employees struct {
 	Employee_id   uuid.UUID `gorm:"primary_key;type:varchar(255)" json:"employee_id"`
-	First_name    string    `json:"first_name"`
-	Last_name     string    `json:"last_name"`
-	Email         string    `json:"email"`
-	Phone         string    `json:"phone"`
-	Salary        int       `json:"salary"`
-	Job_title     string    `json:"job_title"`
-	Date_of_birth string    `json:"date_of_birth"`
+	First_name    string    `gorm:"not null" json:"first_name"`
+	Last_name     string    `gorm:"not null" json:"last_name"`
+	Email         string    `gorm:"not null;unique" json:"email"`
+	Phone         string    `gorm:"not null" json:"phone"`
+	Salary        int       `gorm:"not null;default:0" json:"salary"`
+	Job_title     string    `gorm:"not null" json:"job_title"`
+	Date_of_birth string    `gorm:"not null" json:"date_of_birth"`
 	Hire_date     time.Time `json:"hire_date"`
 	Create_at     time.Time `json:"create_at"`
 	Update_at     time.Time `json:"update_at"`
