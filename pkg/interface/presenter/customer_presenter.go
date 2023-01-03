@@ -75,7 +75,15 @@ func (cp *customerPresenter) CustomerErrorResponse(err error) *fiber.Map {
 	}
 }
 
-func (cp *customerPresenter) CustomerDeleteSuccessResponse() *fiber.Map {
+func (cp *customerPresenter) CustomerDeleteResponse() *fiber.Map {
+	return &fiber.Map{
+		"data":   nil,
+		"error":  nil,
+		"status": true,
+	}
+}
+
+func (cp *customerPresenter) CustomerUpdateResponse() *fiber.Map {
 	return &fiber.Map{
 		"data":   nil,
 		"error":  nil,

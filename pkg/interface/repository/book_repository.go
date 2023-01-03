@@ -1,8 +1,6 @@
 package repository
 
 import (
-	"errors"
-
 	"github.com/google/uuid"
 	"github.com/nutthanonn/go-clean-architecture/pkg/entities"
 	"github.com/nutthanonn/go-clean-architecture/pkg/usecase/repository"
@@ -48,23 +46,9 @@ func (br *bookRepository) ReadBookByID(ID string) (*entities.Books, error) {
 }
 
 func (br *bookRepository) UpdateBook(book *entities.Books, ID string) (*entities.Books, error) {
-	var oldBook *entities.Books
-
-	if err := br.db.First(&oldBook, "book_id = ?", ID).Error; err != nil {
+	if err := br.db.Model(&book).Where("employee_id = ?", ID).Updates(book).Error; err != nil {
 		return nil, err
 	}
-
-	if oldBook == nil {
-		return nil, errors.New("book not found")
-	}
-
-	book.Book_id = oldBook.Book_id
-
-	err := br.db.Save(book).Error
-	if err != nil {
-		return nil, err
-	}
-
 	return book, nil
 }
 

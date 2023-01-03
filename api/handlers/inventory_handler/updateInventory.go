@@ -8,6 +8,7 @@ import (
 	"github.com/nutthanonn/go-clean-architecture/pkg/entities"
 	"github.com/nutthanonn/go-clean-architecture/pkg/interface/controller"
 	"github.com/nutthanonn/go-clean-architecture/pkg/interface/presenter"
+	"gorm.io/gorm"
 )
 
 func (h *inventoryHandler) UpdateInventory(ca controller.AppController) fiber.Handler {
@@ -26,12 +27,16 @@ func (h *inventoryHandler) UpdateInventory(ca controller.AppController) fiber.Ha
 			return c.Status(fiber.StatusBadRequest).JSON(p.InventoryErrorResponse(err))
 		}
 
-		inventory, err := ca.Inventory.UpdateInventory(inventory, id)
+		_, err := ca.Inventory.UpdateInventory(inventory, id)
 
 		if err != nil {
+			if err == gorm.ErrRecordNotFound {
+				return c.Status(fiber.StatusNotFound).JSON(p.InventoryErrorResponse(errors.New("record not found")))
+			}
+
 			return c.Status(fiber.StatusInternalServerError).JSON(p.InventoryErrorResponse(err))
 		}
 
-		return c.Status(fiber.StatusOK).JSON(p.InventorySuccessResponse(inventory))
+		return c.Status(fiber.StatusOK).JSON(p.InventoryUpdateResponse())
 	}
 }

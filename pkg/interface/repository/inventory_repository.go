@@ -1,8 +1,6 @@
 package repository
 
 import (
-	"errors"
-
 	"github.com/nutthanonn/go-clean-architecture/pkg/entities"
 	"github.com/nutthanonn/go-clean-architecture/pkg/usecase/repository"
 	"gorm.io/gorm"
@@ -26,19 +24,8 @@ func (ir *inventoryRespoitory) ReadInventoryById(book_id string) (*entities.Inve
 }
 
 func (ir *inventoryRespoitory) UpdateInventory(inventory *entities.Inventories, ID string) (*entities.Inventories, error) {
-	var oldInventory *entities.Inventories
 
-	if err := ir.db.First(&oldInventory, "book_id = ?", ID).Error; err != nil {
-		return nil, err
-	}
-
-	if oldInventory == nil {
-		return nil, errors.New("inventory not found")
-	}
-
-	inventory.Book_id = oldInventory.Book_id
-
-	if err := ir.db.Save(&inventory).Error; err != nil {
+	if err := ir.db.Model(&inventory).Where("employee_id = ?", ID).Updates(inventory).Error; err != nil {
 		return nil, err
 	}
 

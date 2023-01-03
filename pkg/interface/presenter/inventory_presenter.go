@@ -32,6 +32,14 @@ func (ip *inventoryPresenter) InventorySuccessResponse(data *entities.Inventorie
 	}
 }
 
+func (ip *inventoryPresenter) InventoryUpdateResponse() *fiber.Map {
+	return &fiber.Map{
+		"data":   nil,
+		"status": true,
+		"error":  nil,
+	}
+}
+
 func (ip *inventoryPresenter) InventoryErrorResponse(err error) *fiber.Map {
 	return &fiber.Map{
 		"error":  err.Error(),
