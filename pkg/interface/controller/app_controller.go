@@ -16,4 +16,8 @@ type AppController struct {
 	Inventory interface {
 		InventoryController
 	}
+
+	Order interface {
+		OrderController
+	}
 }
