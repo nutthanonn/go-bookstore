@@ -74,7 +74,15 @@ func (bp *bookPresenter) BookErrorResponse(err error) *fiber.Map {
 	}
 }
 
-func (bp *bookPresenter) BookDeleteSuccessResponse() *fiber.Map {
+func (bp *bookPresenter) BookDeleteResponse() *fiber.Map {
+	return &fiber.Map{
+		"status": true,
+		"data":   nil,
+		"error":  nil,
+	}
+}
+
+func (bp *bookPresenter) BookUpdateResponse() *fiber.Map {
 	return &fiber.Map{
 		"status": true,
 		"data":   nil,
