@@ -9,5 +9,6 @@ type CustomerPresenter interface {
 	CustomerSuccessResponse(*entities.Customers) *fiber.Map
 	CustomersSuccessResponse([]*entities.Customers) *fiber.Map
 	CustomerErrorResponse(err error) *fiber.Map
-	CustomerDeleteSuccessResponse() *fiber.Map
+	CustomerUpdateResponse() *fiber.Map
+	CustomerDeleteResponse() *fiber.Map
 }

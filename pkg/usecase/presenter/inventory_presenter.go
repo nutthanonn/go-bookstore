@@ -7,5 +7,6 @@ import (
 
 type InventoryPresenter interface {
 	InventorySuccessResponse(data *entities.Inventories) *fiber.Map
+	InventoryUpdateResponse() *fiber.Map
 	InventoryErrorResponse(err error) *fiber.Map
 }

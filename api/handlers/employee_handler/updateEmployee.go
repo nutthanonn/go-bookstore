@@ -8,6 +8,7 @@ import (
 	"github.com/nutthanonn/go-clean-architecture/pkg/entities"
 	"github.com/nutthanonn/go-clean-architecture/pkg/interface/controller"
 	"github.com/nutthanonn/go-clean-architecture/pkg/interface/presenter"
+	"gorm.io/gorm"
 )
 
 func (h *employeeHandlers) UpdateEmployee(ca controller.AppController) fiber.Handler {
@@ -25,13 +26,17 @@ func (h *employeeHandlers) UpdateEmployee(ca controller.AppController) fiber.Han
 			return c.Status(fiber.StatusBadRequest).JSON(p.EmployeeErrorResponse(err))
 		}
 
-		updateEmp, err := ca.Employee.UpdateEmployee(&emp, id)
+		_, err := ca.Employee.UpdateEmployee(&emp, id)
 
 		if err != nil {
+			if err == gorm.ErrRecordNotFound {
+				return c.Status(fiber.StatusNotFound).JSON(p.EmployeeErrorResponse(errors.New("record not found")))
+			}
+
 			return c.Status(fiber.StatusInternalServerError).JSON(p.EmployeeErrorResponse(err))
 		}
 
-		return c.Status(fiber.StatusOK).JSON(p.EmployeeSuccessResponse(updateEmp))
+		return c.Status(fiber.StatusOK).JSON(p.EmployeeUpdateResponse())
 
 	}
 }

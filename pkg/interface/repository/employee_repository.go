@@ -1,8 +1,6 @@
 package repository
 
 import (
-	"errors"
-
 	"github.com/google/uuid"
 	"github.com/nutthanonn/go-clean-architecture/pkg/entities"
 	"github.com/nutthanonn/go-clean-architecture/pkg/usecase/repository"
@@ -48,18 +46,14 @@ func (er *employeeRepository) ReadEmployeeById(ID string) (*entities.Employees, 
 }
 
 func (er *employeeRepository) UpdateEmployee(emp *entities.Employees, ID string) (*entities.Employees, error) {
-	var oldEmp *entities.Employees
-	if err := er.db.First(&oldEmp, "employee_id = ?", ID).Error; err != nil {
+
+	_, err := er.ReadEmployeeById(ID)
+
+	if err != nil {
 		return nil, err
 	}
 
-	if oldEmp == nil {
-		return nil, errors.New("employee not found")
-	}
-
-	emp.Employee_id = oldEmp.Employee_id
-
-	if err := er.db.Save(&emp).Error; err != nil {
+	if err := er.db.Model(&emp).Where("employee_id = ?", ID).Updates(emp).Error; err != nil {
 		return nil, err
 	}
 

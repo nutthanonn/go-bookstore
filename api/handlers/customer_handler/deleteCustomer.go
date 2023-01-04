@@ -24,6 +24,6 @@ func (h *customerHandlers) DeleteCustomer(ca controller.AppController) fiber.Han
 			return c.Status(fiber.StatusInternalServerError).JSON(p.CustomerErrorResponse(err))
 		}
 
-		return c.Status(fiber.StatusOK).JSON(p.CustomerDeleteSuccessResponse())
+		return c.Status(fiber.StatusOK).JSON(p.CustomerDeleteResponse())
 	}
 }

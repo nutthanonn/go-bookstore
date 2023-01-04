@@ -9,5 +9,6 @@ type EmployeePresenter interface {
 	EmployeeSuccessResponse(emp *entities.Employees) *fiber.Map
 	EmployeesSuccessResponse(emp []*entities.Employees) *fiber.Map
 	EmployeeDeleteResponse() *fiber.Map
+	EmployeeUpdateResponse() *fiber.Map
 	EmployeeErrorResponse(err error) *fiber.Map
 }
