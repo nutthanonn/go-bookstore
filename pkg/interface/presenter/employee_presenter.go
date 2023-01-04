@@ -58,6 +58,14 @@ func (ep *employeePresenter) EmployeesSuccessResponse(emp []*entities.Employees)
 	}
 }
 
+func (ep *employeePresenter) EmployeeUpdateResponse() *fiber.Map {
+	return &fiber.Map{
+		"status": true,
+		"data":   nil,
+		"error":  nil,
+	}
+}
+
 func (ep *employeePresenter) EmployeeDeleteResponse() *fiber.Map {
 	return &fiber.Map{
 		"status": true,

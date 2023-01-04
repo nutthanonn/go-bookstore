@@ -24,6 +24,6 @@ func (h *bookHandler) DeleteBook(ca controller.AppController) fiber.Handler {
 			return c.Status(fiber.StatusInternalServerError).JSON(p.BookErrorResponse(err))
 		}
 
-		return c.Status(fiber.StatusOK).JSON(p.BookDeleteSuccessResponse())
+		return c.Status(fiber.StatusOK).JSON(p.BookDeleteResponse())
 	}
 }

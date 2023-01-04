@@ -8,6 +8,7 @@ import (
 	"github.com/nutthanonn/go-clean-architecture/pkg/entities"
 	"github.com/nutthanonn/go-clean-architecture/pkg/interface/controller"
 	"github.com/nutthanonn/go-clean-architecture/pkg/interface/presenter"
+	"gorm.io/gorm"
 )
 
 func (h *bookHandler) UpdateBook(ca controller.AppController) fiber.Handler {
@@ -25,11 +26,16 @@ func (h *bookHandler) UpdateBook(ca controller.AppController) fiber.Handler {
 			return c.Status(fiber.StatusBadRequest).JSON(p.BookErrorResponse(err))
 		}
 
-		updatedBook, err := ca.Book.UpdateBook(&book, id)
+		_, err := ca.Book.UpdateBook(&book, id)
+
 		if err != nil {
+			if err == gorm.ErrRecordNotFound {
+				return c.Status(fiber.StatusNotFound).JSON(p.BookErrorResponse(errors.New("record not found")))
+			}
+
 			return c.Status(fiber.StatusInternalServerError).JSON(p.BookErrorResponse(err))
 		}
 
-		return c.Status(fiber.StatusOK).JSON(p.BookSuccessResponse(updatedBook))
+		return c.Status(fiber.StatusOK).JSON(p.BookUpdateResponse())
 	}
 }

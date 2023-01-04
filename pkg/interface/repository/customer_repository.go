@@ -1,8 +1,6 @@
 package repository
 
 import (
-	"errors"
-
 	"github.com/google/uuid"
 	"github.com/nutthanonn/go-clean-architecture/pkg/entities"
 	"github.com/nutthanonn/go-clean-architecture/pkg/usecase/repository"
@@ -48,19 +46,7 @@ func (cr *customerRepository) CreateCustomer(cus *entities.Customers) (*entities
 }
 
 func (cr *customerRepository) UpdateCustomer(cus *entities.Customers, ID string) (*entities.Customers, error) {
-	var oldCustomer *entities.Customers
-
-	if err := cr.db.First(&oldCustomer, "customer_id = ?", ID).Error; err != nil {
-		return nil, err
-	}
-
-	if oldCustomer == nil {
-		return nil, errors.New("customer not found")
-	}
-
-	cus.Customer_id = oldCustomer.Customer_id
-
-	if err := cr.db.Save(cus).Error; err != nil {
+	if err := cr.db.Model(&cus).Where("employee_id = ?", ID).Updates(cus).Error; err != nil {
 		return nil, err
 	}
 
