@@ -11,7 +11,7 @@ import (
 func (h *customerHandlers) CreateCustomer(ca controller.AppController) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		fields := []string{"First_name", "Last_name", "Email", "Phone"}
-		var cus *entities.Customers
+		var cus entities.Customers
 		p := presenter.NewCustomerPresenter()
 		handle := handlers.NewAppHandler()
 
@@ -23,7 +23,7 @@ func (h *customerHandlers) CreateCustomer(ca controller.AppController) fiber.Han
 			return c.Status(fiber.StatusBadRequest).JSON(p.CustomerErrorResponse(err))
 		}
 
-		customer, err := ca.Customer.CreateCustomer(cus)
+		customer, err := ca.Customer.CreateCustomer(&cus)
 
 		if err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(p.CustomerErrorResponse(err))
