@@ -35,6 +35,6 @@ func (h *bookHandler) CreateBook(ca controller.AppController) fiber.Handler {
 			return c.Status(fiber.StatusInternalServerError).JSON(p.BookErrorResponse(err))
 		}
 
-		return c.Status(fiber.StatusOK).JSON(p.BookSuccessResponse(createdBook))
+		return c.Status(fiber.StatusOK).JSON(p.BookCreateResponse(createdBook))
 	}
 }

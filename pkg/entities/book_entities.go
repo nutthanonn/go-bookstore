@@ -17,7 +17,7 @@ type Books struct {
 	Updated_at   time.Time `gorm:"autoUpdateTime" json:"updated_at"`
 
 	// foreign key for Inventory table
-	Inventory_id Inventories `gorm:"foreignkey:Book_id"`
+	Inventory Inventories `gorm:"foreignkey:Book_id"`
 
 	// foreign key for OrderDetails table
 	OrderDetails []OrderDetails `gorm:"foreignkey:Book_id"`
