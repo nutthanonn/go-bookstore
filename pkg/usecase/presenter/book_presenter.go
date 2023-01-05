@@ -6,6 +6,7 @@ import (
 )
 
 type BookPresenter interface {
+	BookCreateResponse(data *entities.Books) *fiber.Map
 	BookSuccessResponse(data *entities.Books) *fiber.Map
 	BooksSuccessResponse(data []*entities.Books) *fiber.Map
 	BookErrorResponse(err error) *fiber.Map

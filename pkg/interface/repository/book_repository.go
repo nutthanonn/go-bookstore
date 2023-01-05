@@ -18,8 +18,16 @@ func NewBookRepository(db *gorm.DB) repository.BookRepository {
 func (br *bookRepository) CreateBook(book *entities.Books) (*entities.Books, error) {
 	book.Book_id = uuid.New()
 
-	err := br.db.Create(book).Error
-	if err != nil {
+	if err := br.db.Create(&book).Error; err != nil {
+		return nil, err
+	}
+
+	inventory := &entities.Inventories{
+		Book_id:  book.Book_id,
+		Quantity: 1,
+	}
+
+	if err := br.db.Model(&inventory).Create(&inventory).Error; err != nil {
 		return nil, err
 	}
 
