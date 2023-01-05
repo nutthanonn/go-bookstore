@@ -46,7 +46,7 @@ func (cr *customerRepository) CreateCustomer(cus *entities.Customers) (*entities
 }
 
 func (cr *customerRepository) UpdateCustomer(cus *entities.Customers, ID string) (*entities.Customers, error) {
-	if err := cr.db.Model(&cus).Where("employee_id = ?", ID).Updates(cus).Error; err != nil {
+	if err := cr.db.Model(&cus).Where("customer_id = ?", ID).Updates(cus).Error; err != nil {
 		return nil, err
 	}
 

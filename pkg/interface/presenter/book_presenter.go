@@ -14,8 +14,6 @@ type Book struct {
 	Publish_year string    `json:"publish_year"`
 	Price        float32   `json:"price"`
 	Genre        string    `json:"genre"`
-
-	Inventory_id entities.Inventories `json:"inventory_id"`
 }
 
 type bookPresenter struct{}
@@ -24,7 +22,7 @@ func NewBookPresenter() presenter.BookPresenter {
 	return &bookPresenter{}
 }
 
-func (bp *bookPresenter) BookSuccessResponse(data *entities.Books) *fiber.Map {
+func (bp *bookPresenter) BookCreateResponse(data *entities.Books) *fiber.Map {
 	var book = Book{
 		Book_id:      data.Book_id,
 		Title:        data.Title,
@@ -32,7 +30,25 @@ func (bp *bookPresenter) BookSuccessResponse(data *entities.Books) *fiber.Map {
 		Publish_year: data.Publish_year,
 		Price:        data.Price,
 		Genre:        data.Genre,
-		Inventory_id: data.Inventory_id,
+	}
+
+	return &fiber.Map{
+		"status": true,
+		"error":  nil,
+		"data":   book,
+	}
+
+}
+
+func (bp *bookPresenter) BookSuccessResponse(data *entities.Books) *fiber.Map {
+	var book = entities.Books{
+		Book_id:      data.Book_id,
+		Title:        data.Title,
+		Author:       data.Author,
+		Publish_year: data.Publish_year,
+		Price:        data.Price,
+		Genre:        data.Genre,
+		Inventory:    data.Inventory,
 	}
 
 	return &fiber.Map{
@@ -43,17 +59,17 @@ func (bp *bookPresenter) BookSuccessResponse(data *entities.Books) *fiber.Map {
 }
 
 func (bp *bookPresenter) BooksSuccessResponse(data []*entities.Books) *fiber.Map {
-	var books []Book
+	var books []entities.Books
 
 	for _, book := range data {
-		b := Book{
+		b := entities.Books{
 			Book_id:      book.Book_id,
 			Title:        book.Title,
 			Author:       book.Author,
 			Publish_year: book.Publish_year,
 			Price:        book.Price,
 			Genre:        book.Genre,
-			Inventory_id: book.Inventory_id,
+			Inventory:    book.Inventory,
 		}
 
 		books = append(books, b)
