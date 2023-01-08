@@ -69,6 +69,16 @@ go test -v
 | /api/employee/:id |  PUT   |        Update employee        |
 | /api/employee/:id | DELETE |        Delete employee        |
 
+## Customer Router
+
+|     API Path      | Method |         What it does          |
+| :---------------: | :----: | :---------------------------: |
+|   /api/customer   |  GET   | Fetches the list of customers |
+| /api/customer/:id |  GET   |     Fetch customer by id      |
+|   /api/customer   |  POST  |        Create customer        |
+| /api/customer/:id |  PUT   |        Update customer        |
+| /api/customer/:id | DELETE |        Delete customer        |
+
 ## Inventory Router
 
 |     API Path      | Method |        What it does        |
