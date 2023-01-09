@@ -22,15 +22,6 @@ func (br *bookRepository) CreateBook(book *entities.Books) (*entities.Books, err
 		return nil, err
 	}
 
-	inventory := &entities.Inventories{
-		Book_id:  book.Book_id,
-		Quantity: 1,
-	}
-
-	if err := br.db.Model(&inventory).Create(&inventory).Error; err != nil {
-		return nil, err
-	}
-
 	return book, nil
 }
 
@@ -62,6 +53,10 @@ func (br *bookRepository) UpdateBook(book *entities.Books, ID string) (*entities
 
 func (br *bookRepository) DeleteBook(ID string) error {
 	br.db.Begin() // start transaction
+
+	if err := br.db.Where("book_id = ?", ID).Delete(&entities.OrderDetails{}).Error; err != nil {
+		return err
+	}
 
 	if err := br.db.Where("book_id = ?", ID).Delete(&entities.Inventories{}).Error; err != nil {
 		return err
