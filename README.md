@@ -79,6 +79,14 @@ go test -v
 | /api/customer/:id |  PUT   |        Update customer        |
 | /api/customer/:id | DELETE |        Delete customer        |
 
+## Order Router
+
+|    API Path    | Method |      What it does       |
+| :------------: | :----: | :---------------------: |
+| /api/order/:id |  GET   | Fetch order by order_id |
+|   /api/order   |  POST  |      Create order       |
+| /api/order/:id | DELETE |      Delete order       |
+
 ## Inventory Router
 
 |     API Path      | Method |        What it does        |
