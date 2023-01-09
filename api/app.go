@@ -24,7 +24,8 @@ func main() {
 	r := registry.NewRegistry(db)
 	routers.BookRouter(api, r.NewAppController())
 	routers.EmployeeRouter(api, r.NewAppController())
-	routers.CustomerHandler(api, r.NewAppController())
+	routers.CustomerRouter(api, r.NewAppController())
+	routers.OrderRouter(api, r.NewAppController())
 
 	app.Listen(":3000")
 }
