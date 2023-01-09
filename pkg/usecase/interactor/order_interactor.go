@@ -15,7 +15,7 @@ type OrderInteractor interface {
 	CreateOrder(order *entities.Orders) (*entities.Orders, error)
 	ReadOrderById(order_id string) (*entities.Orders, error)
 	UpdateOrder(order *entities.Orders, ID string) (*entities.Orders, error)
-	DeleteOrder(order *entities.Orders, ID string) (*entities.Orders, error)
+	DeleteOrder(ID string) error
 }
 
 func NewOrderInteractor(op presenter.OrderPresenter, or repository.OrderRepository) OrderInteractor {
@@ -49,10 +49,11 @@ func (oi *orderInteractor) UpdateOrder(order *entities.Orders, ID string) (*enti
 	return order, nil
 }
 
-func (oi *orderInteractor) DeleteOrder(order *entities.Orders, ID string) (*entities.Orders, error) {
-	order, err := oi.OrderRepository.DeleteOrder(order, ID)
-	if err != nil {
-		return nil, err
+func (oi *orderInteractor) DeleteOrder(ID string) error {
+
+	if err := oi.OrderRepository.DeleteOrder(ID); err != nil {
+		return err
 	}
-	return order, nil
+
+	return nil
 }

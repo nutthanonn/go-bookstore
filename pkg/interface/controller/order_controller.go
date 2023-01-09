@@ -13,7 +13,7 @@ type OrderController interface {
 	CreateOrder(order *entities.Orders) (*entities.Orders, error)
 	ReadOrderById(order_id string) (*entities.Orders, error)
 	UpdateOrder(order *entities.Orders, ID string) (*entities.Orders, error)
-	DeleteOrder(order *entities.Orders, ID string) (*entities.Orders, error)
+	DeleteOrder(ID string) error
 }
 
 func NewOrderController(oi interactor.OrderInteractor) OrderController {
@@ -34,6 +34,6 @@ func (oc *orderController) UpdateOrder(order *entities.Orders, ID string) (*enti
 	return oc.OrderInteractor.UpdateOrder(order, ID)
 }
 
-func (oc *orderController) DeleteOrder(order *entities.Orders, ID string) (*entities.Orders, error) {
-	return oc.OrderInteractor.DeleteOrder(order, ID)
+func (oc *orderController) DeleteOrder(ID string) error {
+	return oc.OrderInteractor.DeleteOrder(ID)
 }

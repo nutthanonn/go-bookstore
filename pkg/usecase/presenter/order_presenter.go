@@ -8,4 +8,5 @@ import (
 type OrderPresenter interface {
 	OrderSuccessResponse(order *entities.Orders) *fiber.Map
 	OrderErrorResponse(err error) *fiber.Map
+	OrderDeleteResponse() *fiber.Map
 }

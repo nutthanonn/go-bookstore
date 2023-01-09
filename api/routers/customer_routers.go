@@ -6,7 +6,7 @@ import (
 	"github.com/nutthanonn/go-clean-architecture/pkg/interface/controller"
 )
 
-func CustomerHandler(app fiber.Router, ca controller.AppController) {
+func CustomerRouter(app fiber.Router, ca controller.AppController) {
 	ch := customerHandler.NewCustomerHandlers()
 
 	app.Get("/customer", ch.GetCustomer(ca))
