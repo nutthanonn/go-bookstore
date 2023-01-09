@@ -26,7 +26,7 @@ func Test_GetCustomerById(t *testing.T) {
 	app := fiber.New()
 	api := app.Group("/api")
 	r := registry.NewRegistry(db)
-	routers.CustomerHandler(api, r.NewAppController())
+	routers.CustomerRouter(api, r.NewAppController())
 	t.Run("FAKE UUID", func(t *testing.T) {
 		req := httptest.NewRequest("GET", "/api/customer/123", nil)
 		req.Header.Set("Content-Type", "application/json")
