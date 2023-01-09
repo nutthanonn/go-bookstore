@@ -24,13 +24,13 @@ func NewOrderPresenter() presenter.OrderPresenter {
 
 func (op *orderPresenter) OrderSuccessResponse(order *entities.Orders) *fiber.Map {
 	var o = &Order{
-		Order_id:    order.Order_id,
-		Customer_id: order.Customer_id,
-		Order_date:  order.Order_date,
+		Order_id:     order.Order_id,
+		Customer_id:  order.Customer_id,
+		OrderDetails: order.OrderDetails,
 	}
 
 	return &fiber.Map{
-		"status": "success",
+		"status": true,
 		"data":   o,
 		"error":  nil,
 	}
@@ -38,8 +38,16 @@ func (op *orderPresenter) OrderSuccessResponse(order *entities.Orders) *fiber.Ma
 
 func (op *orderPresenter) OrderErrorResponse(err error) *fiber.Map {
 	return &fiber.Map{
-		"status": "error",
+		"status": false,
 		"data":   nil,
 		"error":  err.Error(),
+	}
+}
+
+func (op *orderPresenter) OrderDeleteResponse() *fiber.Map {
+	return &fiber.Map{
+		"status": true,
+		"data":   nil,
+		"error":  nil,
 	}
 }
