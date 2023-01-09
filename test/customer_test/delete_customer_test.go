@@ -26,7 +26,7 @@ func Test_DeleteCustomer(t *testing.T) {
 	app := fiber.New()
 	api := app.Group("/api")
 	r := registry.NewRegistry(db)
-	routers.CustomerHandler(api, r.NewAppController())
+	routers.CustomerRouter(api, r.NewAppController())
 
 	t.Run("NO PARAMS", func(t *testing.T) {
 		req := httptest.NewRequest("DELETE", "/api/customer/", nil)

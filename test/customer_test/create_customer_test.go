@@ -26,7 +26,7 @@ func Test_CreateCustomer(t *testing.T) {
 	app := fiber.New()
 	api := app.Group("/api")
 	r := registry.NewRegistry(db)
-	routers.CustomerHandler(api, r.NewAppController())
+	routers.CustomerRouter(api, r.NewAppController())
 
 	t.Run("FAIL CREATE CUSTOMER", func(t *testing.T) {
 		req := httptest.NewRequest("POST", "/api/customer", nil)
