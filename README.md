@@ -7,7 +7,8 @@ This is a sample application that demonstrates how to build a Go application usi
 - [Getting Started](#getting-started)
   - [Installing](#installing)
   - [Setup](#Setup)
-  - [UnitTesting](#unit-testing)
+  - [Run Server](#run-server)
+  - [Unit Testing](#unit-testing)
   - [ER Diagram](#er-diagram)
   - [Router](#installing)
     - [User Router](#user-router)
@@ -32,18 +33,29 @@ go get
 
 _Create .env file in root project_
 
-```
+```.env
 DB_USERNAME=
 DB_PASSWORD=
 DB_HOST=
 DB_PORT=
 DB_NAME=
+DB_TEST_NAME=
+COOKIE_SECRET_KEY=
+TOKEN_SECRET_KEY=
+```
+
+### Run Server
+
+```bash
+chmod +x start_server.sh
+./start_server.sh
 ```
 
 ### Unit Testing
 
 ```bash
 cd test
+cd directory_for_testing
 go test -v
 ```
 
