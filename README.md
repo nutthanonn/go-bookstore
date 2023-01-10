@@ -13,7 +13,6 @@ This is a sample application that demonstrates how to build a Go application usi
   - [Router](#installing)
     - [User Router](#user-router)
     - [Book Router](#book-router)
-- [Project Structure](#project-structure)
 
 ## Getting Started
 
