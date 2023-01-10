@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/nutthanonn/go-clean-architecture/api/infrastructure/datastore"
-	"github.com/nutthanonn/go-clean-architecture/api/routers"
+	"github.com/nutthanonn/go-clean-architecture/api/infrastructure/routers"
 	"github.com/nutthanonn/go-clean-architecture/pkg/registry"
 )
 
