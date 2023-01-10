@@ -7,7 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	utils "github.com/gofiber/fiber/v2/utils"
 	"github.com/nutthanonn/go-clean-architecture/api/infrastructure/datastore"
-	"github.com/nutthanonn/go-clean-architecture/api/routers"
+	"github.com/nutthanonn/go-clean-architecture/api/infrastructure/routers"
 	"github.com/nutthanonn/go-clean-architecture/pkg/registry"
 )
 
@@ -26,7 +26,7 @@ func Test_UpdateCustomer(t *testing.T) {
 	app := fiber.New()
 	api := app.Group("/api")
 	r := registry.NewRegistry(db)
-	routers.CustomerHandler(api, r.NewAppController())
+	routers.CustomerRouter(api, r.NewAppController())
 
 	t.Run("NO PARAMS", func(t *testing.T) {
 		req := httptest.NewRequest("PUT", "/api/customer/", nil)

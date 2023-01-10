@@ -4,11 +4,17 @@ import (
 	"github.com/google/uuid"
 	"github.com/nutthanonn/go-clean-architecture/pkg/entities"
 	"github.com/nutthanonn/go-clean-architecture/pkg/usecase/repository"
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
 type customerRepository struct {
 	db *gorm.DB
+}
+
+func HashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
 }
 
 func NewCustomerRepository(db *gorm.DB) repository.CustomerRepository {
@@ -37,6 +43,13 @@ func (cr *customerRepository) ReadCustomerById(ID string) (*entities.Customers, 
 func (cr *customerRepository) CreateCustomer(cus *entities.Customers) (*entities.Customers, error) {
 
 	cus.Customer_id = uuid.New()
+	hash_password, err := HashPassword(cus.Password)
+
+	if err != nil {
+		return nil, err
+	}
+
+	cus.Password = hash_password
 
 	if err := cr.db.Create(cus).Error; err != nil {
 		return nil, err

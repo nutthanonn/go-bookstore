@@ -20,4 +20,8 @@ type AppController struct {
 	Order interface {
 		OrderController
 	}
+
+	Auth interface {
+		AuthController
+	}
 }
