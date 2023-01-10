@@ -14,6 +14,6 @@ func EncryptCookie() interface{} {
 
 	return encryptcookie.New(encryptcookie.Config{
 		Key:    COOKIE_SECRET_KEY,
-		Except: []string{"csrf_cookie"}, // exclude CSRF cookie
+		Except: []string{"csrf_"}, // exclude CSRF cookie
 	})
 }
