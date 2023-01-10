@@ -14,7 +14,7 @@ import (
 
 const projectDirName = "go-bookstore" // change to relevant project name
 
-func loadEnv() {
+func LoadEnv() {
 	projectName := regexp.MustCompile(`^(.*` + projectDirName + `)`)
 	currentWorkDirectory, _ := os.Getwd()
 	rootPath := projectName.Find([]byte(currentWorkDirectory))
@@ -27,7 +27,7 @@ func loadEnv() {
 }
 
 func NewDB() *gorm.DB {
-	loadEnv()
+	LoadEnv()
 
 	DB_USERNAME := os.Getenv("DB_USERNAME")
 	DB_PASSWORD := os.Getenv("DB_PASSWORD")

@@ -11,6 +11,7 @@ type Customers struct {
 	First_name  string    `gorm:"not null" json:"first_name"`
 	Last_name   string    `gorm:"not null" json:"last_name"`
 	Email       string    `gorm:"not null;unique" json:"email"`
+	Password    string    `gorm:"not null" json:"password"`
 	Phone       string    `gorm:"not null" json:"phone"`
 	Address     string    `json:"address"`
 	City        string    `json:"city"`

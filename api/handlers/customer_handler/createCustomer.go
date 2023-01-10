@@ -10,7 +10,7 @@ import (
 
 func (h *customerHandlers) CreateCustomer(ca controller.AppController) fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		fields := []string{"First_name", "Last_name", "Email", "Phone"}
+		fields := []string{"First_name", "Last_name", "Email", "Password"}
 		var cus entities.Customers
 		p := presenter.NewCustomerPresenter()
 		handle := handlers.NewAppHandler()
