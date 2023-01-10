@@ -24,5 +24,6 @@ func (r *registry) NewAppController() controller.AppController {
 		Customer:  r.NewCustomerController(),
 		Inventory: r.NewInventoryController(),
 		Order:     r.NewOrderController(),
+		Auth:      r.NewAuthController(),
 	}
 }
