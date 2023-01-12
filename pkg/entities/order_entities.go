@@ -11,6 +11,7 @@ type Orders struct {
 	Customer_id uuid.UUID `json:"customer_id"`
 	Create_at   time.Time `gorm:"autoCreateTime" json:"create_at"`
 	Update_at   time.Time `gorm:"autoUpdateTime" json:"update_at"`
+	Status      bool      `gorm:"default:false" json:"status"`
 
 	// foreign key for OrderDetails table
 	OrderDetails []OrderDetails `gorm:"foreignkey:Order_id" json:"order_details"`

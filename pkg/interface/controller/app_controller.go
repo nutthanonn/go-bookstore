@@ -24,4 +24,8 @@ type AppController struct {
 	Auth interface {
 		AuthController
 	}
+
+	Sale interface {
+		SaleController
+	}
 }
